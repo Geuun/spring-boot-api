@@ -1,5 +1,6 @@
 package com.api.springbootapi.controller;
 
+import com.api.springbootapi.domain.dto.MemberDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -49,6 +50,7 @@ public class GetController {
     /**
      * ex5.7 Map객체 활용
      *  -> 웹의 특성상 어떤 값이 들어올지 특정하기 힘듬
+     *  http://localhost:8080/api/v1/get-api/request2?name=geun&email=email@email.com&organization=student
      */
     @GetMapping(value = "/request2")
     public String getRequestParam2(@RequestParam Map<String, String> param) {
@@ -59,5 +61,15 @@ public class GetController {
         });
 
         return sb.toString();
+    }
+
+    /**
+     * 5.2.5 DTO 객체를 활용한 GET메서드 구현
+     * http://localhost:8080/api/v1/get-api/request3?name=geun&email=email@email.com&organization=student
+     */
+    @GetMapping(value = "/request3")
+    public String getRequestParam3(MemberDto memberDto) {
+//        return memberDto.getName() + " " + memberDto.getEmail() + " " + memberDto.getOrganization();
+        return memberDto.toString();
     }
 }
