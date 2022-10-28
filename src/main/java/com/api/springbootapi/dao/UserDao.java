@@ -3,6 +3,7 @@ package com.api.springbootapi.dao;
 import com.api.springbootapi.domain.User;
 import com.api.springbootapi.domain.dto.UserRequestDto;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -25,7 +26,18 @@ public class UserDao {
 
     public void insert(User user) {
         this.jdbcTemplate.update("insert into `likelion-db`.users(id, name, password) values(?, ?, ?)", user.getId(), user.getName(), user.getPassword());
+    }
 
+    public User select(String id) {
+        String sql = "SELECT * FROM `likelion-db`.users WHERE id = ?";
+        RowMapper<User> rowMapper = new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                User user = new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
+                return user;
+            }
+        };
+        return this.jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 
     public void deleteAll() {
