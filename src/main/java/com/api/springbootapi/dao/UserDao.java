@@ -24,8 +24,8 @@ public class UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void insert(User user) {
-        this.jdbcTemplate.update("insert into `likelion-db`.users(id, name, password) values(?, ?, ?)", user.getId(), user.getName(), user.getPassword());
+    public int insert(User user) {
+        return this.jdbcTemplate.update("insert into `likelion-db`.users(id, name, password) values(?, ?, ?)", user.getId(), user.getName(), user.getPassword());
     }
 
     public User select(String id) {

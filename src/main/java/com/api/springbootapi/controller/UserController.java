@@ -2,8 +2,10 @@ package com.api.springbootapi.controller;
 
 import com.api.springbootapi.dao.UserDao;
 import com.api.springbootapi.domain.User;
+import com.api.springbootapi.domain.dto.UserRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,10 +27,11 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public User selectAndInsert() {
-        User user1 = new User("1", "geun", "1234");
-        userDao.insert(user1);
-        return userDao.select("1");
+    public ResponseEntity<Integer> selectAndInsert(@RequestBody UserRequestDto userRequestDto) {
+        User user = new User(userRequestDto.getId(), userRequestDto.getName(), userRequestDto.getPassword());
+        return ResponseEntity
+                .ok()
+                .body(userDao.insert(user));
     }
 
     @DeleteMapping(value = "/deleteId")
