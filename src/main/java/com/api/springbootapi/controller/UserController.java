@@ -4,13 +4,16 @@ import com.api.springbootapi.dao.UserDao;
 import com.api.springbootapi.domain.User;
 import com.api.springbootapi.domain.dto.UserRequestDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
 @RequestMapping("/api/v1/user")
 public class UserController {
-    private final UserDao userDao;
+//    private final UserDao userDao;
+    @Autowired
+    private UserDao userDao;
 
     public UserController(UserDao userDao) {
         this.userDao = userDao;
