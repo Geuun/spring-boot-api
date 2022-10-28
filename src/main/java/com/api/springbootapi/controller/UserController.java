@@ -2,7 +2,6 @@ package com.api.springbootapi.controller;
 
 import com.api.springbootapi.dao.UserDao;
 import com.api.springbootapi.domain.User;
-import com.api.springbootapi.domain.dto.UserRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +25,12 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String  selectAndInsert() {
+    public User selectAndInsert() {
         User user1 = new User("1", "geun", "1234");
         userDao.insert(user1);
-        return "id: " + user1.getId() + "/ name: " + user1.getName() + "/ password :" + user1.getPassword();
+        return userDao.select("1");
     }
+
     @DeleteMapping(value = "/deleteId")
     public String deleteId(@RequestParam String id) {
         log.info("deleteId path 입니다.");
