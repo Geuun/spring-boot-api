@@ -23,47 +23,15 @@ public class UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
-
-    public void add(UserRequestDto user){
-        this.jdbcTemplate.update("insert into `likelion-db`.users(id, name, password) values(?,?,?)",
-                user.getId(), user.getName(), user.getPassword());
+    public void add(User user){
+        this.jdbcTemplate.update("insert into `likelion-db`.users(id, name, password) values(?, ?, ?)", user.getId(), user.getName(), user.getPassword());
 
     }
 
-    public int deleteAll() {
-        return this.jdbcTemplate.update("DELETE from `likelion-db`.users");
+    public void deleteAll(){
+        this.jdbcTemplate.update("delete from `likelion-db`.users");
     }
 
-    public User findById(String id) {
-        Map<String, String> env = System.getenv();
-        Connection c;
-        try {
-            // DB접속 (ex sql workbeanch실행)
-            c = dataSource.getConnection();
-
-            // Query문 작성
-            PreparedStatement pstmt = c.prepareStatement("SELECT * FROM `likelion-db`.users WHERE id = ?");
-            pstmt.setString(1, id);
-
-            // Query문 실행
-            ResultSet rs = pstmt.executeQuery();
-            User user = null;
-            if (rs.next()) {
-                user = new User(rs.getString("id"), rs.getString("name"),
-                        rs.getString("password"));
-            }
-
-            rs.close();
-            pstmt.close();
-            c.close();
-
-            if (user == null) throw new RuntimeException();
-
-            return user;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void deleteById(String id){
+        this.jdbcTemplate.update("delete from `likelion-db`.users where id = ?", id);
 }
