@@ -1,12 +1,14 @@
 package com.api.springbootapi.controller;
 
 import com.api.springbootapi.domain.dto.MemberDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/v1/get-api")
+@Slf4j
 public class GetController {
     /**
      * 5.2.2 매개변수가 없는 GET 메서드 구현
@@ -14,6 +16,7 @@ public class GetController {
      */
     @GetMapping(value = "/name")
     public String getName() {
+        log.info("getName으로 요청이 들어왔습니다");
         return "Geun";
     }
 
@@ -23,6 +26,7 @@ public class GetController {
      */
     @GetMapping(value = "/variable1/{variable}")
     public String getVariable1(@PathVariable String variable) {
+        log.info("getVariable1으로 요청이 들어왔습니다");
         return variable;
     }
 
@@ -31,7 +35,8 @@ public class GetController {
      * -> @PathVariable에는 변수의 이름을 특정할 수이쓴ㄴ value 요소가 존재
      */
     @GetMapping(value = "/variable2/{variable}")
-    public String getVariable(@PathVariable("variable") String var) {
+    public String getVariable2(@PathVariable("variable") String var) {
+        log.info("getVariable2으로 요청이 들어왔습니다");
         return var;
     }
 
