@@ -6,3 +6,6 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  url: jdbc:mysql://localhost:8080/likelion-db
+  username: root
+  password: qwer1234!
