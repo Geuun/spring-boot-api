@@ -23,15 +23,16 @@ public class UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void add(User user){
+    public void insert(User user) {
         this.jdbcTemplate.update("insert into `likelion-db`.users(id, name, password) values(?, ?, ?)", user.getId(), user.getName(), user.getPassword());
 
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         this.jdbcTemplate.update("delete from `likelion-db`.users");
     }
 
-    public void deleteById(String id){
+    public void deleteById(String id) {
         this.jdbcTemplate.update("delete from `likelion-db`.users where id = ?", id);
+    }
 }
