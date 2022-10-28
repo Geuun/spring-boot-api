@@ -1,9 +1,8 @@
 package com.api.springbootapi.controller;
 
 import com.api.springbootapi.dao.UserDao;
-import com.api.springbootapi.domain.User;
+import com.api.springbootapi.domain.dto.UserRequestDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public User addAndGet(@ModelAttribute User user) {
+    public UserRequestDto addAndGet(@ModelAttribute UserRequestDto user) {
         userDao.add(user);
         log.info("회원가입 user = {}", user);
         return user;

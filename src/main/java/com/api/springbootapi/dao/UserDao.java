@@ -1,6 +1,7 @@
 package com.api.springbootapi.dao;
 
 import com.api.springbootapi.domain.User;
+import com.api.springbootapi.domain.dto.UserRequestDto;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,7 @@ public class UserDao {
 
 
 
-    public void add(User user){
+    public void add(UserRequestDto user){
         this.jdbcTemplate.update("insert into `likelion-db`.users(id, name, password) values(?,?,?)",
                 user.getId(), user.getName(), user.getPassword());
 
